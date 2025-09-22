@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let resume1 = `
+Name: jOhN doE 
+Email: john.doe@Example.com
+Phone: 9876543210
+Skills: HTML, CSS, JavaScript, Python, SQL
+Extra: Contact me at john.altmail@example.org
+#developer #coder
+`;
+// 1. Format Name
+function formatName(rawName) {
+  return rawName.trim().split(/\s+/)
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(" ");
+}
+// 2. Extract and Validate Emails
+function extractEmails(text) {
+  let emails = text.match(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\b/gi) || [];
+  return emails.map(e => e.toLowerCase());
+}
+// 3. Validate Mobile Number
+function validateMobile(number) {
+  return /^[6-9]\d{9}$/.test(number) ? number : "Invalid phone number";
+}
+// 4. Process Skills
+function processSkills(rawSkills) {
+  return rawSkills.split(",").map(s => s.trim()).filter(s => s);
+}
+// 5. Extract Hashtags
+function extractHashtags(text) {
+  return text.match(/#[A-Za-z0-9_]+/g) || [];
+}
+// 6. Word Count
+function countWords(text) {
+  return (text.match(/\b\w+\b/g) || []).length;
+}
+// 7. Vowel Count
+function countVowels(text) {
+  return (text.match(/[aeiou]/gi) || []).length;
+}
+function processResume(resumeText) {
+  let output = {};
+  // Name
+  let nameMatch = resumeText.match(/Name:\s*(.+)/i);
+  output.name = nameMatch ? formatName(nameMatch[1]) : "";
+  // Emails
+  let emails = extractEmails(resumeText);
+  output.email = emails[0] || "";
+  output.emailCount = emails.length;
+  // Phone
+  let phoneMatch = resumeText.match(/Phone:\s*(\d+)/i);
+  output.phone = phoneMatch ? validateMobile(phoneMatch[1]) : "Invalid phone number";
+  // Skills
+  let skillsMatch = resumeText.match(/Skills:\s*(.+)/i);
+  output.skills = skillsMatch ? processSkills(skillsMatch[1]) : [];
+  // Hashtags
+  output.hashtags = extractHashtags(resumeText);
+  // Word count
+  output.wordCount = countWords(resumeText);
+  // Vowel count
+  output.vowelCount = countVowels(resumeText);
+  return output;
+}
+
+let resume2 = `
+Name: aLIcE SMiTH
+Email: alice.smith@work.com
+Phone: 1234567890
+Skills: C, C++ ,Java, JavaScript
+Extra Info: Reach me also at alice.backup@mail.org
+#programmer #techie
+`;
+
+let resume3 = `
+Name: ROBERT broWn
+Email: robert_brown@example.com
+Phone: 8765432109
+Skills: PHP,MySQL, HTML ,CSS, JavaScript
+Other: robert.personal@domain.org robert.dev@github.com
+#fullstack #developer #javascript #100DaysOfCode
+`;
+
+let resume4 = `
+Random Text: Ignore this line
+Name: keVin o'CONNOR
+Email: kevin.oConnor@Mail.com
+Phone: 7894561230
+Skills: Python, Machine Learning, Data Science , AI
+Extra Notes: You can also contact: kevin.backup123@mail.org
+#AI #MachineLearning #DataScience #coder
+`;
+
+console.log("Test 1:", processResume(resume1));
+console.log("Test 2:", processResume(resume2));
+console.log("Test 3:", processResume(resume3));
+console.log("Test 4:", processResume(resume4));
+
+    </script>
+</body>
+</html>
