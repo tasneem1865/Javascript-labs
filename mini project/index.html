@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pastelle | Smart Color Palette Generator</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo" aria-hidden="true">
+      <!-- soft abstract droplet -->
+      <svg width="36" height="36" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pastelle logo">
+        <defs>
+          <linearGradient id="lg" x1="0" x2="1">
+            <stop offset="0" stop-color="#FFDDE6"/>
+            <stop offset="1" stop-color="#E6F7FF"/>
+          </linearGradient>
+        </defs>
+        <path d="M32 6c6 0 18 6 18 16 0 10-12 18-18 30-6-12-18-20-18-30C14 12 26 6 32 6z" fill="url(#lg)"/>
+      </svg>
+    </div>
+    <h1 onclick="document.querySelector('a[href=\'#home\']').click()">Pastelle</h1>
+  </div>
+
+  <nav>
+    <a href="#home" class="active">Home</a>
+    <a href="#saved">Saved</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div>
+    <button id="loginBtn" class="auth-btn">Login / Signup</button>
+    <button id="logoutBtn" class="auth-btn hidden">Logout</button>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="tool" id="tool-generate"><span>🎨</span><p>Generate</p></div>
+  <div class="tool" id="tool-upload"><span>🖼</span><p>Upload</p></div>
+  <div class="tool" id="tool-contrast"><span>⚖️</span><p>Contrast</p></div>
+</div>
+
+<main>
+  <!-- HOME -->
+  <section id="home" class="page active">
+    <h2 style="text-align:center;font-family:'Playfair Display';">Color Palette Inspiration</h2>
+    <div id="paletteNameTag" style="text-align:center;margin:6px;font-size:13px;color:#6b5b53;">— • NUDE • —</div>
+
+    <div class="controls" style="text-align:center;margin-top:10px;">
+      <button id="generateBtn" class="btn btn-primary">Generate Palette</button>
+      <button id="copyAllBtn" class="btn btn-outline">Copy All</button>
+      <button id="openQuickBtn" class="btn btn-outline">Quick View</button>
+    </div>
+
+    <div id="palette" class="palette" aria-live="polite"></div>
+
+    <!-- Quick View -->
+    <div id="quickView" class="quickview">
+      <h3 style="text-align:center">Quick View — Copied Colors</h3>
+      <div id="quickGrid" class="quick-grid"></div>
+      <div class="controls">
+        <input id="saveName" class="input" placeholder="Name palette">
+        <button id="saveBtn" class="btn btn-primary">Save Palette</button>
+        <button id="closeQuick" class="btn btn-danger">Close</button>
+      </div>
+    </div>
+
+    <!-- Contrast -->
+    <div id="contrastWrap" class="contrast">
+      <h3 style="text-align:center">Contrast Checker</h3>
+      <div style="display:flex;justify-content:center;gap:10px;margin-top:10px;">
+        <input type="color" id="c1" value="#222222">
+        <input type="color" id="c2" value="#ffffff">
+        <button id="checkBtn" class="btn btn-primary">Check</button>
+      </div>
+      <p id="contrastResult" style="text-align:center;margin-top:8px"></p>
+    </div>
+  </section>
+
+  <!-- SAVED -->
+  <section id="saved" class="page">
+    <h2 style="text-align:center;">Saved Palettes</h2>
+    <div class="controls">
+      <button id="refreshSavedBtn" class="btn btn-outline">Refresh</button>
+      <button id="clearAllSavedBtn" class="btn btn-danger">Clear All</button>
+    </div>
+    <div id="savedGrid" class="saved-grid"></div>
+  </section>
+
+  <!-- UPLOAD -->
+  <section id="upload" class="page">
+    <h2 style="text-align:center;">Extract From Image</h2>
+    <div class="controls">
+      <button id="pickImageBtn" class="btn btn-primary">Choose Image</button>
+    </div>
+    <input id="uploadInput" type="file" accept="image/*" style="display:none">
+    <div id="uploadMsg" class="tagline-small" style="text-align:center;margin-top:10px;"></div>
+    <div id="uploadPalette" class="palette"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="page">
+    <h2 style="text-align:center;">About Pastelle</h2>
+    <div class="about-grid">
+      <div class="about-card"><h4>🎨 Smart Generator</h4><p>Creates 7-color harmonious palettes inspired by real trends.</p></div>
+      <div class="about-card"><h4>🖼 Image Extraction</h4><p>Automatically finds dominant tones from any image.</p></div>
+      <div class="about-card"><h4>⚖️ Contrast Tool</h4><p>Helps ensure accessibility with accurate contrast ratios.</p></div>
+      <div class="about-card"><h4>📋 Quick View</h4><p>Preview and copy selected colors in a smooth arc layout.</p></div>
+      <div class="about-card"><h4>💾 Save & Reload</h4><p>Store palettes locally and revisit them anytime.</p></div>
+      <div class="about-card"><h4>🌸 Aesthetic Design</h4><p>Soft pastels and minimal UI ideal for designers.</p></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="page">
+    <h2 style="text-align:center;">Contact</h2>
+    <div class="contact">
+      <p>📧 Email: <a href="mailto:tasneemsadikot1865@gmail.com">tasneemsadikot1865@gmail.com</a></p>
+      <p>💼 LinkedIn: <a href="https://www.linkedin.com/in/tasneemsadikot" target="_blank">Tasneem Sadikot</a></p>
+      <hr>
+      <form onsubmit="event.preventDefault();alert('Thank you for reaching out!');">
+        <input class="input" placeholder="Name">
+        <input class="input" placeholder="Email">
+        <textarea class="input" placeholder="Message..."></textarea>
+        <button class="btn btn-primary" style="margin-top:6px;">Send</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>© 2025 Pastelle — Create, Save & Inspire</footer>
+
+<!-- Auth Modal -->
+<div id="authModal" class="auth-modal">
+  <div class="auth-box">
+    <h3 id="authTitle">Login</h3>
+    <input id="authName" placeholder="Name (signup)" class="hidden">
+    <input id="authEmail" placeholder="Email">
+    <input id="authPass" type="password" placeholder="Password">
+    <button id="authSubmit" class="btn btn-primary">Login</button>
+    <button id="authToggle" class="btn btn-outline">Don’t have an account? Sign up</button>
+    <button id="authClose" class="btn btn-danger">Close</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
